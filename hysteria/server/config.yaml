@@ -1,0 +1,16 @@
+listen: ":8443"
+
+auth:
+  type: userpass
+  userpass:
+    example: password # меняем
+
+tls:
+  cert: /etc/hysteria/hysteria.server.crt
+  key: /etc/hysteria/hysteria.server.key
+
+masquerade:
+  type: proxy
+  proxy:
+    url: https://id.tbank.ru/
+    rewriteHost: true

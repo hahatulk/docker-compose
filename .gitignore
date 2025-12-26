@@ -1,0 +1,7 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+hysteria/sha256.txt
+hysteria/client/*

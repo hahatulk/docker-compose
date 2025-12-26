@@ -1,0 +1,10 @@
+server: ip_address:8443 # меняем ip
+auth: example:passowrd # меняем
+
+tls:
+  sni: id.tbank.ru
+  insecure: true
+  pinSHA256: "sha256_from_certgen.sh" # меняем
+
+http:
+  listen: 127.0.0.1:8080

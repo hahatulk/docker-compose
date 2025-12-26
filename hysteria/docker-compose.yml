@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  hysteria:
+    image: tobyxdd/hysteria
+    container_name: hysteria
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - acme:/acme
+      - ./server/config.yaml:/etc/hysteria.yaml/config.yaml
+      - ./client:/client
+      - ./ssl/hysteria.server.crt:/etc/hysteria/hysteria.server.crt
+      - ./ssl/hysteria.server.key:/etc/hysteria/hysteria.server.key
+    command: ["server", "-c", "/etc/hysteria.yaml/config.yaml"]
+
+volumes:
+  acme:
