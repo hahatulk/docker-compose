@@ -1,0 +1,17 @@
+services:
+  shlink-backend:
+    image: shlinkio/shlink:latest
+    ports:
+      - '5321:8080'
+    environment:
+      DEFAULT_DOMAIN: domain.ru
+      IS_HTTPS_ENABLED: true
+      GEOLITE_LICENSE_KEY: kjh23ljkbndskj345
+
+  shlink-web:
+    image: shlinkio/shlink-web-client:latest
+    ports:
+      - '5322:8080'
+    environment:
+      SHLINK_SERVER_URL: https://domain.ru
+      #SHLINK_SERVER_API_KEY: key
