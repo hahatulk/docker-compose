@@ -12,6 +12,9 @@ services:
     image: shlinkio/shlink-web-client:latest
     ports:
       - '5322:8080'
+    volumes:
+      - ./servers/servers.json:/usr/share/nginx/html/servers.json
+      - ./servers/servers.json:/usr/share/nginx/html/conf.d/
     environment:
       SHLINK_SERVER_URL: https://domain.ru
       #SHLINK_SERVER_API_KEY: key
