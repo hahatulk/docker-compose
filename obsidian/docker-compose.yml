@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  couchdb:
+    image: docker.io/oleduc/docker-obsidian-livesync-couchdb:latest
+    container_name: obsidian-couchdb
+    restart: unless-stopped
+    environment:
+      COUCHDB_USER: any_username
+      COUCHDB_PASSWORD: any_password
+      COUCHDB_DATABASE: my-vault
+    ports:
+      - "5984:5984"
+    volumes:
+      - ./couchdb-data:/opt/couchdb/data
