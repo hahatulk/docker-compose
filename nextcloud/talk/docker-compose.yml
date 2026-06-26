@@ -1,0 +1,23 @@
+name: talk-hpb
+
+services:
+  talk:
+    image: ghcr.io/nextcloud-releases/aio-talk:latest
+    container_name: nextcloud-talk-hpb
+    init: true
+    restart: unless-stopped
+    ports:
+      - "3480:3478/tcp"   # TURN + STUN
+      - "3480:3478/udp"   # TURN + STUN
+      - "8181:8081/tcp"   # Signaling (Janus + signaling server)
+    environment:
+      - NC_DOMAIN=domain.ru
+      - TALK_HOST=domain.ru
+      - TURN_SECRET=<nextcloud real secret>
+      - SIGNALING_SECRET=<nextcloud real secret>
+      - INTERNAL_SECRET=1f454f8ffff45a1f39060ff8fffff4a708a31ff241ff733f7fffff012107ef5a # random string
+      - TALK_MAX_STREAM_BITRATE=50000000
+      - TALK_MAX_SCREEN_BITRATE=50000000
+      - TZ=Europe/Moscow
+      - TALK_PORT=3478
+

@@ -1,0 +1,20 @@
+Self-Hosting Guide - Docker
+Quick start
+In order to quickly run Jitsi Meet on a machine running Docker and Docker Compose, follow these steps:
+
+Download and extract the latest release. DO NOT clone the git repository. See below if you are interested in running test images:
+wget $(wget -q -O - https://api.github.com/repos/jitsi/docker-jitsi-meet/releases/latest | grep zip | cut -d\" -f4)
+
+
+Unzip the package, and enter the new folder:
+unzip <filename>
+cd <foldername>
+
+Create a .env file by copying and adjusting env.example:
+cp env.example .env
+
+Set strong passwords in the security section options of .env file by running the following bash script
+./gen-passwords.sh
+
+Create required CONFIG directories
+mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}

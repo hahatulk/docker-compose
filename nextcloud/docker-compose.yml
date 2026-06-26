@@ -1,0 +1,33 @@
+name: nextcloud-aio # Add the container to the same compose project like all the sibling containers are added to automatically.
+services:
+  nextcloud-aio-mastercontainer:
+    image: ghcr.io/nextcloud-releases/all-in-one:latest # This is the container image used. You can switch to ghcr.io/nextcloud-releases/all-in-one:beta if you want to help testing new releases. See https://github.com/nextcloud/all-in-one#how-to-switch-the-channel
+    init: true # This setting makes sure that signals from main process inside the container are correctly forwarded to children. See https://docs.docker.com/reference/compose-file/services/#init
+    restart: unless-stopped # This makes sure that the container starts always together with the host OS. See https://docs.docker.com/reference/compose-file/services/#restart
+    container_name: nextcloud-aio-mastercontainer # This line is not allowed to be changed as otherwise AIO will not work correctly
+    volumes:
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config # This line is not allowed to be changed as otherwise the built-in backup solution will not work
+      - /var/run/docker.sock:/var/run/docker.sock:ro # May be changed on macOS, Windows or docker rootless. See the applicable documentation. If adjusting, don't forget to also set 'WATCHTOWER_DOCKER_SOCKET_PATH'!
+      - /mnt/data/nextcloud/data/nextcloud:/mnt/data/nextcloud/ncdata
+    networks: ["nextcloud-aio"]
+    ports:
+      - "8980:8080" # This is the AIO interface, served via https and self-signed certificate. See https://github.com/nextcloud/all-in-one#explanation-of-used-ports
+    environment: # Is needed when using any of the options below
+      APACHE_PORT: 11000 # Is needed when running behind a web server or reverse proxy (like Apache, Nginx, Caddy, Cloudflare Tunnel and else). See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+      APACHE_IP_BINDING: 0.0.0.0 # Should be set when running behind a web server or reverse proxy (like Apache, Nginx, Caddy, Cloudflare Tunnel and else) that is running on the same host. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+#      SKIP_DOMAIN_VALIDATION: true # This should only be set to true if things are correctly configured. See https://github.com/nextcloud/all-in-one#how-to-skip-the-domain-validation
+      TALK_MAX_STREAM_BITRATE: "50000000"
+      TALK_MAX_SCREEN_BITRATE: "50000000"
+      NEXTCLOUD_DATADIR: /mnt/data/nextcloud/ncdata
+      TZ: Europe/Moscow
+
+volumes: # If you want to store the data on a different drive, see https://github.com/nextcloud/all-in-one#how-to-store-the-filesinstallation-on-a-separate-drive
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer # This line is not allowed to be changed as otherwise the built-in backup solution will not work
+
+networks:
+  nextcloud-aio:
+    name: nextcloud-aio
+    external: true
+    driver_opts:
+      com.docker.network.driver.mtu: 1440
