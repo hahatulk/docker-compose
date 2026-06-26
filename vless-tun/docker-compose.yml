@@ -1,0 +1,13 @@
+services:
+  vless-tun:
+    build: .
+    container_name: vless-tun
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    privileged: true
+    environment:
+      - GOXRAY_CONFIG_URL=vless://твоя_полная_ссылка_сюда
