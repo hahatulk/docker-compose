@@ -10,6 +10,9 @@ docker stop nextcloud-aio-redis
 docker stop nextcloud-aio-talk
 docker stop nextcloud-aio-whiteboard
 docker stop nextcloud-aio-database
+docker stop nextcloud-talk-recording
+docker stop nextcloud-talk-hpb
+
 
 docker container rm nextcloud-aio-apache
 docker container rm nextcloud-aio-collabora
@@ -21,6 +24,8 @@ docker container rm nextcloud-aio-redis
 docker container rm nextcloud-aio-talk
 docker container rm nextcloud-aio-whiteboard
 docker container rm nextcloud-aio-database
+docker container rm nextcloud-talk-recording
+docker container rm nextcloud-talk-hpb
 
 docker volume rm nextcloud_aio_apache
 docker volume rm nextcloud_aio_database

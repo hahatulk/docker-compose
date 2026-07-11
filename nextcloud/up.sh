@@ -15,3 +15,5 @@ docker start nextcloud-aio-whiteboard
 docker start nextcloud-aio-database
 docker start nextcloud-aio-talk-recording
 docker start nextcloud-aio-fulltextsearch
+docker start nextcloud-talk-hpb
+docker start nextcloud-talk-recording

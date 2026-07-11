@@ -12,3 +12,5 @@ docker stop nextcloud-aio-whiteboard
 docker stop nextcloud-aio-database
 docker stop nextcloud-aio-talk-recording
 docker stop nextcloud-aio-fulltextsearch
+docker stop nextcloud-talk-hpb
+docker stop nextcloud-talk-recording
