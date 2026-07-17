@@ -14,3 +14,8 @@ bash up.sh
 ```bash
 bash down.sh
 ```
+
+### Reindex files
+```bash
+bash scan.sh
+```
