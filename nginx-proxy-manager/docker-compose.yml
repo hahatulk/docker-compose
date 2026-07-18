@@ -3,10 +3,9 @@ services:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     network_mode: host
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+      - ./conf.d/botblocker-nginx-settings.conf:/etc/nginx/conf.d/botblocker-nginx-settings.conf
+      - ./conf.d/globalblacklist.conf:/etc/nginx/conf.d/globalblacklist.conf
+      - ./bots.d:/etc/nginx/bots.d
