@@ -1,0 +1,17 @@
+services:
+  stalwart:
+    image: stalwart-local:v0.16.27
+    container_name: stalwart
+    restart: unless-stopped
+    environment:
+      STALWART_PUBLIC_URL: "https://mail.domain.ru"
+    ports:
+      - "25:25"           # Входящая SMTP-почта
+      - "465:465"         # SMTP TLS
+      - "587:587"         # SMTP STARTTLS
+      - "993:993"         # IMAP TLS
+      - "2443:443"        # HTTPS / Webmail
+      - "8781:8080"       # Первоначальная настройка
+    volumes:
+      - ./stalwart-data/config:/etc/stalwart
+      - ./stalwart-data/data:/var/lib/stalwart
